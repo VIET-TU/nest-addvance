@@ -1,0 +1,13 @@
+import { MailerService } from '@nest-modules/mailer';
+import { Processor, Process } from '@nestjs/bull';
+
+import { Job } from 'bull';
+
+@Processor('send-email')
+export class EmailConsumer {
+  constructor(private mailerservice: MailerService) {}
+  @Process('register')
+  async registerEmail(job: Job<unknown>) {
+    console.log('data :>> ', job.data);
+  }
+}
